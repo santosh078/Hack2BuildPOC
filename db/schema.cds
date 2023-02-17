@@ -26,7 +26,7 @@ entity Users
     base_location : String(100);
     role : String(100);
     handle : String(100);
-    photos : Association to many Photos on photos.users = $self;
+    photos : Composition of many Photos on photos.users = $self;
 }
 
 entity Photos
@@ -39,8 +39,8 @@ entity Photos
     createdAt : DateTime;
     location : String(100);
     points : Integer;
-    users : Association to one Users;
     comments : Association to many Comments on comments.photos = $self;
+    users : Association to one Users;
 }
 
 entity Comments
