@@ -33,3 +33,6 @@ mta_archives/
 # LCAP
 build/ui-deployer/
 build/dist/
+
+
+.vscode/settings.json

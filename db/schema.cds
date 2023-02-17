@@ -40,6 +40,7 @@ entity Photos
     location : String(100);
     points : Integer;
     users : Association to one Users;
+    comments : Association to many Comments on comments.photos = $self;
 }
 
 entity Comments
@@ -50,10 +51,14 @@ entity Comments
     comment : LargeString;
     photoId : String(100);
     userId : String(100);
+    photos : Association to one Photos;
 }
 
 entity community
 {
     key ID : UUID
         @Core.Computed;
+    description : LargeString;
+    userId : String(100);
+    photoId : String(100);
 }
