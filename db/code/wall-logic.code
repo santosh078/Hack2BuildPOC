@@ -1,0 +1,23 @@
+{
+    "version": "1.0",
+    "codes": [
+        {
+            "type": "Assignment",
+            "result": "data",
+            "expression": {
+                "syntax": "context.request.data",
+                "dependencies": [
+                    "Variable"
+                ]
+            }
+        }
+    ],
+    "configuration": {
+        "entity": "TestEYShare.wall",
+        "phase": "before",
+        "events": [
+            "READ"
+        ]
+    },
+    "hash": "8c2e0c4a98db3fdb8393d41924f9663a1274f962"
+}

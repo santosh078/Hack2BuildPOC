@@ -29,6 +29,8 @@ entity Users
     photos : Association to many Photos on photos.users = $self;
     comments : Composition of many Comments on comments.users = $self;
     community : Association to one community;
+    follows : Composition of many follows on follows.users = $self;
+    likes : Composition of many likes on likes.users = $self;
 }
 
 entity Photos
@@ -44,6 +46,7 @@ entity Photos
     points : Integer;
     comments : Association to many Comments on comments.photos = $self;
     users : Association to one Users;
+    likes : Composition of many likes on likes.photos = $self;
 }
 
 entity Comments
@@ -60,11 +63,41 @@ entity Comments
 
 entity community
 {
-    key ID : UUID
+    key id : UUID
         @Core.Computed;
     description : LargeString;
     userId : String(100);
     photoId : String(100);
     users : Association to one Users;
-    users_community : Association to many Users on users_community.community = $self;
 }
+
+entity follows
+{
+    key id : UUID
+        @Core.Computed;
+    createdAt : Date;
+    followedId : String(100);
+    followerId : String;
+    mute : Boolean;
+    users : Association to one Users;
+}
+
+entity likes
+{
+    key id : UUID
+        @Core.Computed;
+    createdAt : DateTime;
+    photoId : String(100);
+    userId : String(100);
+    users : Association to one Users;
+    photos : Association to one Photos;
+}
+
+entity wall as projection on Photos
+{
+    *,
+    users.userId as user_id,
+    users.name,
+    users.profileImage,
+    users.handle
+};

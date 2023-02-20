@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "hash": "35fcb10e0ff5a1b6a1ec4ad14982cb60d5da80e8",
+  "configuration": {
+    "entity": "TestEYShareService.feeds",
+    "phase": "on",
+    "events": [
+      ""
+    ]
+  },
+  "codes": [
+    {
+      "type": "Assignment",
+      "result": "data",
+      "expression": {
+        "syntax": "context.request.data",
+        "dependencies": [
+          "Variable"
+        ]
+      }
+    },
+    {
+      "type": "FunctionCall",
+      "syntax": ""
+    },
+    {
+      "type": "CustomCode",
+      "syntax": ""
+    }
+  ]
+}
