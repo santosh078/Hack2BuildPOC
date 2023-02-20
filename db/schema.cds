@@ -28,9 +28,9 @@ entity Users
     handle : String(100);
     photos : Association to many Photos on photos.users = $self;
     comments : Composition of many Comments on comments.users = $self;
-    community : Association to one community;
     follows : Composition of many follows on follows.users = $self;
     likes : Composition of many likes on likes.users = $self;
+    community : Association to one community;
 }
 
 entity Photos
@@ -68,7 +68,7 @@ entity community
     description : LargeString;
     userId : String(100);
     photoId : String(100);
-    users : Association to one Users;
+    users : Association to many Users on users.community = $self;
 }
 
 entity follows

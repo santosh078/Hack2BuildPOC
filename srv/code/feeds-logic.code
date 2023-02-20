@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "hash": "35fcb10e0ff5a1b6a1ec4ad14982cb60d5da80e8",
+  "hash": "603ab58ec8efdd89edbdeee8088415e436ff6dd5",
   "configuration": {
     "entity": "TestEYShareService.feeds",
     "phase": "on",
@@ -18,14 +18,6 @@
           "Variable"
         ]
       }
-    },
-    {
-      "type": "FunctionCall",
-      "syntax": ""
-    },
-    {
-      "type": "CustomCode",
-      "syntax": ""
     }
   ]
 }

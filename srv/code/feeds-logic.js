@@ -10,6 +10,4 @@ const { APPGYVERFUNCTIONS } = require('@sap/low-code-event-handler/functions');
 module.exports = async function(context) {
 	let data = null;
 	data = context.request.data;
-	;
-	
 };

@@ -7,6 +7,9 @@ service TestEYShareService
 {
     entity feeds as
         projection on my.Photos;
+
+    entity Users as
+        projection on my.Users;
 }
 
 annotate TestEYShareService with @requires :
