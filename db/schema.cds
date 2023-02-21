@@ -32,10 +32,9 @@ entity Users : managed
     community : Association to one community;
 }
 
-entity Photos : managed
+entity Photos : cuid, managed 
 {
-    key photoId : UUID
-    @Core.MediaType: mediaType;
+    @Core.MediaType: mediaType
     @Core.ContentDisposition.Filename: filename
     data: LargeBinary;
     @Core.IsMediaType
