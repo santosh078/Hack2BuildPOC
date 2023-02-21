@@ -35,9 +35,12 @@ entity Users : managed
 entity Photos : managed
 {
     key photoId : UUID
-        @Core.Computed;
-    image : LargeBinary;
-    mimetype : String(100);
+    @Core.MediaType: mediaType
+    @Core.ContentDisposition.Filename: filename
+    data: LargeBinary;
+    @Core.IsMediaType
+    mediaType: String;
+    filename: String;
     caption : LargeString;
     tags : many String(100);
     userId : String(100);

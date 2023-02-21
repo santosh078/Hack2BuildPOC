@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "hash": "74fab445286e4595cca2118e9cef479a211fc06f",
+  "hash": "52c0625fe997326d08a98e1e69a8c06004d6d662",
   "configuration": {
-    "entity": "TestEYShareService.feeds",
+    "entity": "TestEYShareService.undefined",
     "phase": "on",
     "events": [
-      ""
+      "fetchUser"
     ]
   },
   "codes": [
@@ -21,7 +21,7 @@
     },
     {
       "type": "FunctionCall",
-      "syntax": "CQL_SELECT(undefined, TestEYShareService.Users, [profileImage, handle, role, email], \"ID = ${data.userId}\")"
+      "syntax": "CQL_SELECT(undefined, TestEYShareService.Users, [userId, name, createdAt, handle, profileImage])"
     }
   ]
 }

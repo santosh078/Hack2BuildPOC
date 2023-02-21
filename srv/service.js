@@ -3,6 +3,7 @@
  */
 const LCAPApplicationService = require('@sap/low-code-event-handler');
 const feeds_Logic = require('./code/feeds-logic');
+const fetchuser_Logic = require('./code/fetchuser-logic');
 
 class TestEYShareService extends LCAPApplicationService {
     async init() {
@@ -15,8 +16,15 @@ class TestEYShareService extends LCAPApplicationService {
         });
         var i=0;
         this.after ('READ','wall', each => {
-            console.log(`this is inside wall`);
+            console.log(`${JSON.stringify(each)}`);
           })
+        this.on('fetchUser', async (request, next) => {
+            await fetchuser_Logic({
+                request
+            });
+            return next();
+        });
+
         return super.init();
     }
 }
