@@ -13,7 +13,7 @@ using
 }
 from '@sap/cds/common';
 
-entity Users : managed
+entity Users
 {
     key userId : UUID
         @Core.Computed;
