@@ -13,7 +13,10 @@ class TestEYShareService extends LCAPApplicationService {
             });
             return next();
         });
-
+        var i=0;
+        this.after ('READ','wall', each => {
+            console.log(`this is inside wall`);
+          })
         return super.init();
     }
 }

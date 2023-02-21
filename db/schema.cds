@@ -13,16 +13,14 @@ using
 }
 from '@sap/cds/common';
 
-entity Users
+entity Users : managed
 {
     key userId : UUID
         @Core.Computed;
     name : String(100);
     email : String(100);
     profileImage : LargeBinary;
-    
     password : String(100);
-    createdAt : DateTime;
     dob : Date;
     base_location : String(100);
     role : String(100);
@@ -34,7 +32,7 @@ entity Users
     community : Association to one community;
 }
 
-entity Photos
+entity Photos : managed
 {
     key photoId : UUID
         @Core.Computed;
@@ -43,7 +41,6 @@ entity Photos
     caption : LargeString;
     tags : many String(100);
     userId : String(100);
-    createdAt : DateTime;
     location : String(100);
     points : Integer;
     comments : Association to many Comments on comments.photos = $self;
@@ -51,11 +48,10 @@ entity Photos
     likes : Composition of many likes on likes.photos = $self;
 }
 
-entity Comments
+entity Comments : managed
 {
     key commentId : UUID
         @Core.Computed;
-    createdAt : DateTime;
     comment : LargeString;
     photoId : String(100);
     userId : String(100);
@@ -63,7 +59,7 @@ entity Comments
     users : Association to one Users;
 }
 
-entity community
+entity community : managed
 {
     key id : UUID
         @Core.Computed;
@@ -72,36 +68,26 @@ entity community
     photoId : String(100);
 }
 
-entity follows
+entity follows : managed
 {
     key id : UUID
         @Core.Computed;
-    createdAt : Date;
     followedId : String(100);
     followerId : String;
     mute : Boolean;
     users : Association to one Users;
 }
 
-entity likes
+entity likes : managed
 {
     key id : UUID
         @Core.Computed;
-    createdAt : DateTime;
     photoId : String(100);
     userId : String(100);
     users : Association to one Users;
     photos : Association to one Photos;
 }
 
-entity wall as projection on Photos
-{
-    *,
-    users.userId as user_id,
-    users.name,
-    users.profileImage,
-    users.handle
-};
 entity user2community {
   key user : Association to Users;
   key community : Association to community;
