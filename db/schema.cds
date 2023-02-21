@@ -88,7 +88,8 @@ entity likes : managed
     photos : Association to one Photos;
 }
 
-entity user2community {
-  key user : Association to Users;
-  key community : Association to community;
+entity user2community
+{
+    key user : Association to one Users;
+    key community : Association to one community;
 }

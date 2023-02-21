@@ -1,0 +1,20 @@
+[
+	{
+		"entity": "Users",
+		"namespace": "TestEYShare",
+		"file": "/home/user/projects/TestEYShare/db/data/TestEYShare-Users.csv",
+		"isFixed": false
+	},
+	{
+		"entity": "community",
+		"namespace": "TestEYShare",
+		"file": "/home/user/projects/TestEYShare/db/data/TestEYShare-community.csv",
+		"isFixed": false
+	},
+	{
+		"entity": "Photos",
+		"namespace": "TestEYShare",
+		"file": "/home/user/projects/TestEYShare/db/data/TestEYShare-Photos.csv",
+		"isFixed": false
+	}
+]
