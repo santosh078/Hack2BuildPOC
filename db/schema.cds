@@ -35,7 +35,7 @@ entity Users : managed
 entity Photos : managed
 {
     key photoId : UUID
-    @Core.MediaType: mediaType
+    @Core.MediaType: mediaType;
     @Core.ContentDisposition.Filename: filename
     data: LargeBinary;
     @Core.IsMediaType
