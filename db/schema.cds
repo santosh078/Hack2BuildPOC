@@ -61,6 +61,7 @@ entity community : cuid, managed
     description : LargeString
         @Core.Computed;
     photoId : String(100);
+    user_id : String(100);
 }
 
 entity follows : cuid, managed
