@@ -32,11 +32,8 @@ entity Users : cuid, managed
 
 entity Photos : cuid, managed
 {
-    image : LargeBinary
-        @Core.Computed
-        @Core.MediaType : imageType;
-    imageType : String
-        @Core.IsMediaType;
+    image : LargeBinary;
+    mimetype : String(100);
     caption : LargeString;
     tags : many String(100);
     location : String(100);
