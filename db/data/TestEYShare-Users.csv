@@ -1,4 +1,3 @@
-userId;name;email;profileImage;password;dob;base_location;role;handle;community_id;createdAt;createdBy;modifiedAt;modifiedBy
-69e5ed64-1495-41a8-bbc6-50b53d0df29c;name2778;email6596;profileImage2718;password7327;2023-02-21;base_location5842;role3119;handle4196;67f9941a-1337-4851-a886-a9d7bdf535f7;2023-02-21T20:02:38+0530;createdBy4539;2023-02-21T20:02:38+0530;modifiedBy7048
-bc898b74-e5d2-4535-92d1-cdeeca79ab8f;name8380;email3344;profileImage6433;password4493;2023-02-21;base_location1466;role1166;handle7009;ac84090d-5c1b-46a1-9b89-207ea07b64bb;2023-02-21T20:02:38+0530;createdBy3809;2023-02-21T20:02:38+0530;modifiedBy860
-aaee34ea-feeb-4edd-8e6f-818cb9b71b14;name4373;email5758;profileImage1290;password485;2023-02-21;base_location3543;role6508;handle8856;ac84090d-5c1b-46a1-9b89-207ea07b64bb;2023-02-21T20:02:39+0530;createdBy3981;2023-02-21T20:02:39+0530;modifiedBy5672
+name;email;profileImage;password;dob;base_location;role;handle;community_id;createdAt;createdBy;modifiedAt;modifiedBy;ID
+name8642;email3908;profileImage6804;password3766;2023-02-21;base_location7139;role6702;handle6831;;2023-02-21T20:35:30+0530;createdBy8455;2023-02-21T20:35:30+0530;modifiedBy8484;b2b86614-e622-487f-bb17-83b152e8df51
+name2610;email8411;profileImage9430;password7023;2023-02-21;base_location1475;role7328;handle2914;;2023-02-21T20:35:30+0530;createdBy8823;2023-02-21T20:35:30+0530;modifiedBy5898;8c130ef7-695c-4011-8216-e9c0f04df193
