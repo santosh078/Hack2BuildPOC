@@ -20,6 +20,7 @@ entity Users
     name : String(100);
     email : String(100);
     profileImage : LargeBinary;
+    
     password : String(100);
     createdAt : DateTime;
     dob : Date;
@@ -38,6 +39,7 @@ entity Photos
     key photoId : UUID
         @Core.Computed;
     image : LargeBinary;
+    mimetype : String(100);
     caption : LargeString;
     tags : many String(100);
     userId : String(100);
@@ -68,7 +70,6 @@ entity community
     description : LargeString;
     userId : String(100);
     photoId : String(100);
-    users : Association to many Users on users.community = $self;
 }
 
 entity follows
@@ -101,3 +102,7 @@ entity wall as projection on Photos
     users.profileImage,
     users.handle
 };
+entity user2community {
+  key user : Association to Users;
+  key community : Association to community;
+}
