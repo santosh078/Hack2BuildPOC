@@ -15,7 +15,7 @@ from '@sap/cds/common';
 
 entity Users : managed
 {
-    name : String(100);     
+    name : String(100);
     key email : String(100);
     profileImage : LargeBinary;
     mimetype : String(100);
@@ -23,8 +23,8 @@ entity Users : managed
     dob : Date;
     base_location : String(100);
     role : String(100);
-    handle : String(100); 
-    communityId:String(100);
+    handle : String(100);
+    communityId : String(100);
 }
 
 entity Photos : cuid, managed
@@ -35,38 +35,33 @@ entity Photos : cuid, managed
     tags : many String(100);
     location : String(100);
     points : Integer;
-    userId:String(100);    
+    userId : String(100);
 }
 
 entity Comments : cuid, managed
 {
-    comment : LargeString;        
+    comment : LargeString;
     photoId : String(100);
     userId : String(100);
-    
 }
 
 entity community : cuid, managed
 {
-   
-    description : LargeString;        
+    description : LargeString;
     photoId : String(100);
     user_id : String(100);
 }
 
 entity follows : cuid, managed
 {
-     
     followedId : String(100);
     followerId : String;
     mute : Boolean;
-    
 }
 
 entity likes : cuid, managed
 {
-  
-    photoId : String(100);     
+    photoId : String(100);
     userId : String(100);
 }
 
@@ -76,9 +71,12 @@ entity user2community
     key community : Association to one community;
 }
 
-view wall as select from 
-    Photos inner join follows
-    on Photos.userId = follows.followedId and  follows.mute =false {
+entity wall as select
+from Photos
+inner join follows
+    on Photos.userId = follows.followedId
+    and follows.mute = false
+{
     Photos.image,
     Photos.mimetype,
     Photos.caption,
@@ -86,6 +84,6 @@ view wall as select from
     Photos.location,
     Photos.points,
     Photos.userId,
-    follows.followedId, 
+    follows.followedId,
     follows.followerId
-    };
+};
