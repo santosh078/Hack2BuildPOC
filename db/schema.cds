@@ -15,10 +15,10 @@ from '@sap/cds/common';
 
 entity Users : managed
 {
-    name : String(100)
-     @Core.Computed;
+    name : String(100);     
     key email : String(100);
     profileImage : LargeBinary;
+    mimetype : String(100);
     password : String(100);
     dob : Date;
     base_location : String(100);
@@ -40,8 +40,7 @@ entity Photos : cuid, managed
 
 entity Comments : cuid, managed
 {
-    comment : LargeString
-        @Core.Computed;
+    comment : LargeString;        
     photoId : String(100);
     userId : String(100);
     
@@ -49,16 +48,16 @@ entity Comments : cuid, managed
 
 entity community : cuid, managed
 {
-    description : LargeString
-        @Core.Computed;
+   
+    description : LargeString;        
     photoId : String(100);
     user_id : String(100);
 }
 
 entity follows : cuid, managed
 {
-    followedId : String(100)
-        @Core.Computed;
+     
+    followedId : String(100);
     followerId : String;
     mute : Boolean;
     
@@ -66,8 +65,8 @@ entity follows : cuid, managed
 
 entity likes : cuid, managed
 {
-    photoId : String(100)
-        @Core.Computed;
+  
+    photoId : String(100);     
     userId : String(100);
 }
 
@@ -76,3 +75,17 @@ entity user2community
     key user : Association to one Users;
     key community : Association to one community;
 }
+
+view wall as select from 
+    Photos inner join follows
+    on Photos.userId = follows.followedId and  follows.mute =false {
+    Photos.image,
+    Photos.mimetype,
+    Photos.caption,
+    Photos.tags,
+    Photos.location,
+    Photos.points,
+    Photos.userId,
+    follows.followedId, 
+    follows.followerId
+    };

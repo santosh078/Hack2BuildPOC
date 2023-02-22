@@ -1,5 +1,5 @@
 const cds = require('@sap/cds')
-const { Users, wall } = cds.entities ('TestEYShare')
+const { Users,wall } = cds.entities ('TestEYShare')
 
 module.exports = class Authentication {
      /**
@@ -14,7 +14,7 @@ module.exports = class Authentication {
                 console.log(`req.body.email${JSON.stringify(req.body)}`);
                 let emailId=req.body.email;
                 // let userRecord= await SELECT `*` .from (Users,emailId);
-                let userRecord=await SELECT.from(Users).where({email:emailId});
+                let userRecord=await SELECT.from(wall);
                 console.log (`fetched from table userid ${JSON.stringify(userRecord)}`);
                if(userRecord[0]){
                 if(userRecord[0].password.trim() != req.body.password.trim()){
@@ -27,22 +27,6 @@ module.exports = class Authentication {
                 
                }
                
-              
-            } catch (err) {
-                reject(err);
-            }
-        })
-    }
-    async getWall(req, res) {
-       
-        return new Promise(async (reslove, reject) => {
-            try {
-                console.log(`req.body.email${JSON.stringify(req.body)}`);
-                let emailId=req.body.email;
-                // let userRecord= await SELECT `*` .from (Users,emailId);
-                let userRecord=await SELECT.from(wall);
-                console.log (`fetched from table userid ${JSON.stringify(userRecord)}`);
-                           
               
             } catch (err) {
                 reject(err);

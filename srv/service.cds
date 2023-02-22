@@ -31,7 +31,7 @@ service TestEYShareService
     //     points
     // };
 
-    entity Users as projection on my.Users
+    entity Users as projection on my.Users;
     // {
     //     *
     // }
@@ -39,16 +39,16 @@ service TestEYShareService
     // {
     //     password
     // };
-    entity wall
-    as select from CDWallViews.wall_feeds_view;
+    // entity wall
+    // as select from CDWallViews.wall_feeds_view;
     @cds.redirection.target
     entity Photos as projection on my.Photos;
     entity Comments as projection on my.Comments;
     entity community as projection on my.community;
     entity follows as projection on my.follows;
     entity likes as projection on my.likes;
-    action CurrentUser() returns Users;
-     action login(value:post.login) returns Users;
+    action getFeeds(value:post.fetchFeed) returns String;
+    action login(value:post.login) returns String;
 }
 
 annotate TestEYShareService with @requires :

@@ -5,17 +5,17 @@ using {TestEYShare.follows as follows} from '../schema';
 
 entity wall_feeds_view as
    SELECT from photos as P
-   INNER join follows as F 
-   on (P.userId = F.followedId and 
-      F.mute=false and
-      F.followedId = '1234') or P.userId = '321'
-      {
-        P.image,
-        P.caption,
-        P.tags,
-        P.mimetype,
-        F.mute
-      }
+  //  INNER join follows as F 
+  //  on (P.userId = F.followedId and 
+  //     F.mute=false and
+  //     F.followedId = '1234') or P.userId = '321'
+  //     {
+  //       P.image,
+  //       P.caption,
+  //       P.tags,
+  //       P.mimetype,
+  //       F.mute
+  //     }
   //  INNER JOIN follows as follows on (
   //  photos.userId=follows.followedId and
   //  follows.mute=false and
