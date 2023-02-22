@@ -1,6 +1,6 @@
 using { TestEYShare as my } from '../db/schema';
 using { TestEYShare.CDS_Views as CDWallViews } from '../db/CDS_Views/wall_feeds_view';
-
+using TestEYShare.post.types as post from './types/post';
 
 using TestEYShare from '../db/schema';
 
@@ -43,10 +43,12 @@ service TestEYShareService
     as select from CDWallViews.wall_feeds_view;
     @cds.redirection.target
     entity Photos as projection on my.Photos;
-    action fetchUser
-    (
-    )
-    returns Users;
+    entity Comments as projection on my.Comments;
+    entity community as projection on my.community;
+    entity follows as projection on my.follows;
+    entity likes as projection on my.likes;
+    action CurrentUser() returns Users;
+     action login(value:post.login) returns Users;
 }
 
 annotate TestEYShareService with @requires :
