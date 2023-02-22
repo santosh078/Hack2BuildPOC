@@ -4,11 +4,13 @@
 const LCAPApplicationService = require('@sap/low-code-event-handler');
 const feeds_Logic = require('./code/feeds-logic');
 const fetchuser_Logic = require('./code/fetchuser-logic');
-const authenticationContlr = require('./controllers/authentication');
+const authenticationContlr = require('./controller/authentication');
+const cds = require("@sap/cds");
 
 class TestEYShareService extends LCAPApplicationService {
     async init() {
         this.before('*', async req => {
+            cds.connect.to ('sqlite:hack2build.db');
               req.express = req._;
             req.path = req._.req.path;
             req.originalUrl = req._.req.originalUrl;

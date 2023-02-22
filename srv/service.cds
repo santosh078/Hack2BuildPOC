@@ -32,13 +32,13 @@ service TestEYShareService
     // };
 
     entity Users as projection on my.Users
-    {
-        *
-    }
-    excluding
-    {
-        password
-    };
+    // {
+    //     *
+    // }
+    // excluding
+    // {
+    //     password
+    // };
     entity wall
     as select from CDWallViews.wall_feeds_view;
     @cds.redirection.target
