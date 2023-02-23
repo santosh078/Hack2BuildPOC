@@ -59,7 +59,12 @@ entity follows : cuid, managed
     mute : Boolean;
 }
 
-entity likes : cuid, managed
+entity likes :  managed
+{
+    key photoId : String(100);
+    key userId : String(100);
+}
+entity share : cuid, managed
 {
     photoId : String(100);
     userId : String(100);
@@ -71,12 +76,40 @@ entity user2community
     key community : Association to one community;
 }
 
+entity Events:cuid, managed {   
+userId : String(100);
+eventName:String(100);
+description : LargeString;
+dateOfEvent: Date;
+image : LargeBinary;
+mimetype: String(100);
+taggedUsers: many String(1000);
+}
+
+entity EventAttendance {   
+eventId : String(100);
+userId : String(100);
+attending: String(20);
+}
+
+
+
 entity wall as select
 from Photos
 inner join follows
     on Photos.userId = follows.followedId
     and follows.mute = false
+inner join Users
+    on follows.followerId= Users.email  
+left outer join likes
+    on Photos.ID= likes.photoId
+left outer join Comments
+    on Photos.ID= Comments.photoId
+left outer join share
+    on Photos.ID= share.photoId
+
 {
+    Photos.ID,
     Photos.image,
     Photos.mimetype,
     Photos.caption,
@@ -85,5 +118,24 @@ inner join follows
     Photos.points,
     Photos.userId,
     follows.followedId,
-    follows.followerId
+    follows.followerId,
+    Users.profileImage,
+    Users.mimetype as userProfileMimeType:String(50),
+    Users.role,
+    Users.handle,
+    COUNT(likes.photoId) OVER (PARTITION BY Photos.ID) AS likesCount:Integer,
+    COUNT(Comments.photoId) OVER (PARTITION BY Photos.ID) AS commentsCount:Integer,
+    COUNT(share.photoId) OVER (PARTITION BY Photos.ID) AS shareCount:Integer 
 };
+entity Points as
+    select from Photos
+    inner join likes
+        on Photos.ID = likes.photoId
+    {
+        Photos.tags,
+        Photos.userId as postedUser:String(50),
+        likes.userId as likedUser:String(50),
+        likes.createdAt
+   };
+
+
