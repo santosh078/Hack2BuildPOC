@@ -64,6 +64,15 @@ class TestEYShareService extends LCAPApplicationService {
                 let wallRecord = await authenticationCtr.getPoints(req, res);
                 return wallRecord;
                 });
+
+                this.on('getProfileDetails', async (req, res, next)=> {
+                    let authenticationCtr = new ServiceManager();
+                    let wallRecord = await authenticationCtr.getProfileDetails(req, res);
+                    return wallRecord;
+                    });
+
+
+                
         return super.init();
     }
 }

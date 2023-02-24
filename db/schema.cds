@@ -120,7 +120,7 @@ left outer join share
     follows.followedId,
     follows.followerId,
     Users.profileImage,
-    Users.mimetype as userProfileMimeType:String(50),
+    Users.mimetype as userProfileMimeType:String(100),
     Users.role,
     Users.handle,
     COUNT(likes.photoId) OVER (PARTITION BY Photos.ID) AS likesCount:Integer,
@@ -138,4 +138,50 @@ entity Points as
         likes.createdAt
    };
 
+entity Profile as select
+from Photos
+inner join Users
+    on Users.email= Photos.userId  
+left outer join follows
+    on follows.followedId= Photos.userId or follows.followerId= Users.email
+left outer join likes
+    on Photos.ID= likes.photoId
+left outer join Comments
+    on Photos.ID= Comments.photoId
+left outer join share
+    on Photos.ID= share.photoId
+{
+    Photos.ID,
+    Photos.image,
+    Photos.mimetype,
+    Photos.caption,
+    Photos.tags,
+    Photos.location,
+    Photos.points,
+    Photos.userId,    
+    Users.profileImage,
+    Users.mimetype as userProfileMimeType:String(50),
+    Users.role,
+    Users.handle,
+    COUNT(likes.photoId) OVER (PARTITION BY Photos.ID) AS likesCount:Integer,
+    COUNT(Comments.photoId) OVER (PARTITION BY Photos.ID) AS commentsCount:Integer,
+    COUNT(share.photoId) OVER (PARTITION BY Photos.ID) AS shareCount:Integer,
+    COUNT(follows.followerId) OVER (PARTITION BY Photos.userId) AS followersCount:Integer,
+    COUNT(follows.followedId) OVER (PARTITION BY Photos.userId) AS followingCount:Integer,
+};
+
+entity FollowList as select
+from Users
+left outer join follows
+    on follows.followedId= Users.email or follows.followerId= Users.email
+
+{
+   
+    Users.profileImage,
+    Users.mimetype as userProfileMimeType:String(50),
+    Users.role,
+    Users.handle,
+   COUNT(follows.followerId) OVER (PARTITION BY Users.email) AS followingCount:Integer,
+    COUNT(follows.followedId) OVER (PARTITION BY Users.email) AS folllowedCount:Integer,
+};
 

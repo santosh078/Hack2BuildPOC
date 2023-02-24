@@ -1,5 +1,5 @@
 const cds = require('@sap/cds')
-const { Users, wall, Events, Points } = cds.entities('TestEYShare')
+const { Users, wall, Events, Points ,Profile,follows} = cds.entities('TestEYShare')
 
 module.exports = class Authentication {
     /**
@@ -25,6 +25,11 @@ module.exports = class Authentication {
                         reslove(userRecord[0]);
                     }
 
+                }else{
+                    if(userRecord.length ==0){
+                        reslove(null);
+                    }
+                   
                 }
 
 
@@ -41,7 +46,7 @@ module.exports = class Authentication {
                 let emailId = req.body.email;
                 // let userRecord= await SELECT `*` .from (Users,emailId);
                 // console.log(SELECT .from(wall).where({followerId:emailId}));
-                let photoRecord = await SELECT.distinct.from(wall).where({ followerId: emailId });
+                let photoRecord = await SELECT.from(wall).where({ followerId: emailId });
                 let allEvnts = await SELECT.from(Events);
                 //logic to create Feed page
                 let oneEvntObj = {}, onePhotoRecord = {};
@@ -52,6 +57,7 @@ module.exports = class Authentication {
                     onePhotoRecord = photoRecord[0];
                 }
                 photoRecord.forEach((obj) => {
+                    
                     const aKeys = Object.keys(oneEvntObj);
                     for (var i in aKeys) {
                         if (!obj[aKeys[i]] && aKeys[i] != "taggedUsers") {
@@ -114,4 +120,58 @@ module.exports = class Authentication {
             }
         })
     }
+    async getProfileDetails(req, res) {
+        return new Promise(async (reslove, reject) => {
+            try {
+                console.log(`req.body.email${JSON.stringify(req.body)}`);
+                let emailId = req.body.email;
+                // let userRecord= await SELECT `*` .from (Users,emailId);
+                let userRecord = await SELECT.from(Profile).where({ userId: emailId });
+                console.log(`fetched from table likeRecord ${JSON.stringify(userRecord)}`);
+                let allEvnts = await SELECT.from(Events).where({userId:emailId});
+                // let followr = await SELECT.from(follows).where({followedId:emailId}).columns({count(followedId)});
+                let followr=await SELECT `from ${follows} {
+                    count(followedId)
+                 } where followedId = ${emailId} 
+            `
+                console.log(`count is---- ${followr}`);
+                //logic to create Feed page
+                let oneEvntObj = {}, onePhotoRecord = {};
+                if (allEvnts && allEvnts[0]) {
+                    oneEvntObj = allEvnts[0];
+                }
+                if (userRecord && userRecord[0]) {
+                    onePhotoRecord = userRecord[0];
+                }
+                userRecord.forEach((obj) => {
+                    obj.isEvent = false;
+                    const aKeys = Object.keys(oneEvntObj);
+                    for (var i in aKeys) {
+                        if (!obj[aKeys[i]] && aKeys[i] != "taggedUsers") {
+                           
+                            obj[aKeys[i]] = "";
+                        }
+                    }
+                });
+                allEvnts.forEach((obj) => {
+                    obj.isEvent = true;
+                    const aKeys = Object.keys(onePhotoRecord);
+                    for (var i in aKeys) {
+                        if (!obj[aKeys[i]] && aKeys[i] != "tags") {
+                           
+                            obj[aKeys[i]] = "";
+                        }
+                    }
+                });
+                const all = [...userRecord, ...allEvnts];
+                
+                reslove({ result:all });
+
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
+    
 };

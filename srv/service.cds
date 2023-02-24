@@ -53,6 +53,7 @@ service TestEYShareService {
     action getFeeds(value : post.fetchFeed) returns String;
     action login(value : post.login)        returns String;
     action getPoints(value : post.login)        returns String;
+    action getProfileDetails(value : post.login)        returns String;
 }
 
 annotate TestEYShareService with @requires: ['authenticated-user'];
